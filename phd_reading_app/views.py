@@ -1,9 +1,12 @@
 from django.contrib.auth.models import User, Group
+from django.db.models import Model
 from django.shortcuts import render
 from rest_framework import viewsets, permissions, response, views, request
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from phd_reading_app.serializers import UserSerializer, GroupSerializer, EmailTokenObtainPairSerializer
+from phd_reading_app.models import ReadingItem, Tag, Author
+from phd_reading_app.serializers import UserSerializer, GroupSerializer, EmailTokenObtainPairSerializer, \
+    ReadingItemSerializer, TagSerializer, AuthorSerializer
 
 
 # Create your views here.
@@ -35,6 +38,22 @@ class CurrentUserViewSet(views.APIView):
     # case, a valid JWT token is included in the request. It is used before get() runs. Used by the APIView class
     # under the hood so we don't have to do conditional logic.
     def get(self, request):
-        print(request)
         serializer = UserSerializer(request.user)
         return response.Response(serializer.data)
+
+class ReadingItemViewSet(viewsets.ModelViewSet):
+    queryset = ReadingItem.objects.all().order_by('created_at')
+    serializer_class = ReadingItemSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    def get(self, request):
+        print(request)
+
+class TagViewSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class AuthorViewSet(viewsets.ModelViewSet):
+    queryset = Author.objects.all().order_by('last_name')
+    serializer_class = AuthorSerializer
+    permission_classes = [permissions.IsAuthenticated]

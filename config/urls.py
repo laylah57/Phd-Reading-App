@@ -26,6 +26,9 @@ from phd_reading_app.views import CurrentUserViewSet, EmailTokenObtainPairViewSe
 router = routers.DefaultRouter()
 router.register(r"users", views.UserViewSet)
 router.register(r"groups", views.GroupViewSet)
+router.register(r"reading-items", views.ReadingItemViewSet)
+router.register(r"tags", views.TagViewSet)
+router.register(r"authors", views.AuthorViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
