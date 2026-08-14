@@ -8,8 +8,8 @@ class Status(models.TextChoices):
     ABANDONED = 'abandoned', 'Abandoned'
 
 class ReadingItem(models.Model):
-    title = models.CharField(max_length=30)
-    subtitle = models.CharField(max_length=30, blank=True)
+    title = models.CharField(max_length=150)
+    subtitle = models.CharField(max_length=150, blank=True)
     type = models.CharField(max_length=30, blank=True)
     year_published = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)

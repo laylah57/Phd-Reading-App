@@ -45,8 +45,6 @@ class ReadingItemViewSet(viewsets.ModelViewSet):
     queryset = ReadingItem.objects.all().order_by('created_at')
     serializer_class = ReadingItemSerializer
     permission_classes = [permissions.IsAuthenticated]
-    def get(self, request):
-        print(request)
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()

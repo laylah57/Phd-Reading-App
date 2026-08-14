@@ -58,6 +58,7 @@ class ReadingItemSerializer(serializers.ModelSerializer):
             'title',
             'subtitle',
             'year_published',
+            'type',
             'created_at',
             'status',
             'tags',
