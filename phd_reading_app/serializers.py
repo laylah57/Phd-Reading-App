@@ -80,3 +80,18 @@ class ReadingItemSerializer(serializers.ModelSerializer):
             reading_item.tags.add(tag)
 
         return reading_item
+
+    def update(self, instance, validated_data):
+        authors_data = validated_data.pop('authors', [])
+        tags_data = validated_data.pop('tags', [])
+
+        for attr, value in validated_data.items()
+            setattr(instance, attr, value)
+
+        instance.save()
+
+        if authors_data is not None:
+            instance.authors.clear()
+            for author_data in authors_data:
+                author, created = Author.objects.get_or_create(**author_data)
+                instance.authors.add(author)
